@@ -51,4 +51,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('customers', CustomerController::class);
 });
 
+Route::resource('item', ItemController::class)->middleware(['auth', 'verified']);
+
 require __DIR__.'/auth.php';
