@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Models\Item;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -7,6 +8,7 @@ use Illuminate\View\View;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Support\Facades\Gate;
 use DB;
+
 class ItemController extends Controller
 {
  /**
