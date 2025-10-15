@@ -17,4 +17,30 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Shopping Cart Routes
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+   Route::delete('/shoppingCart/remove-item/{id}', [ShoppingCartController::class, 'removeItem'])
+    ->name('shoppingCart.remove');
+
+Route::put('/shoppingCart/update/{id}', [ShoppingCartController::class, 'updateItemQuantity'])
+    ->name('shoppingCart.updateQuantity');
+
+Route::post('/shoppingCart/add/{id}', [ShoppingCartController::class, 'addItemToCart'])
+    ->name('shoppingCart.addItem');
+
+Route::get('/shoppingCart/checkout', [ShoppingCartController::class, 'checkout'])
+    ->name('shoppingCart.checkout');
+
+    // resource route
+Route::resource('shoppingCart', ShoppingCartController::class)->except(['destroy']);
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+     Route::get('/siteVisits/manage', [SiteVisitController::class, 'manage'])->name('siteVisits.manage');
+    Route::get('/siteVisits/assigned', [SiteVisitController::class, 'assigned'])->name('siteVisits.assigned');
+    Route::resource('siteVisits', SiteVisitController::class)->only(['index', 'create', 'store']);
+});
+
 require __DIR__.'/auth.php';

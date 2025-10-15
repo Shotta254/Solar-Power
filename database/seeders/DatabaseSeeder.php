@@ -38,5 +38,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ItemSeeder::class,
         ]);
+
+        // Add items to inventory
+        $this->call([
+            ItemSeeder::class,
+        ]);
     }
 }
