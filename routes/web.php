@@ -5,6 +5,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteVisitController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,6 +45,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
      Route::get('/siteVisits/manage', [SiteVisitController::class, 'manage'])->name('siteVisits.manage');
     Route::get('/siteVisits/assigned', [SiteVisitController::class, 'assigned'])->name('siteVisits.assigned');
     Route::resource('siteVisits', SiteVisitController::class)->only(['index', 'create', 'store']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('customers', CustomerController::class);
 });
 
 require __DIR__.'/auth.php';
